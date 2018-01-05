@@ -1,0 +1,37 @@
+{
+   "author": [ {
+      "email": "etng2004@gmail.com",
+      "name": "Yi Bo"
+   } ],
+   "background": {
+      "scripts": [ "background.js" ]
+   },
+   "description": "Removes garbage like \"utm_source\" from URLs, click toolbar icon to update bookmarks",
+   "homepage_url": "http://y10n.cn/",
+   "icons": {
+      "48": "icon48.png"
+   },
+   "manifest_version": 2,
+   "minimum_chrome_version": "18",
+   "name": "Clean URL",
+   "permissions": [
+      "bookmarks",
+      "chrome://favicon/",
+      "activeTab",
+      "webRequest",
+      "notifications",
+      "webRequestBlocking",
+      "\u003Call_urls>"
+   ],
+   "browser_action": {
+      "default_icon": "icon48.png",
+      "default_popup": "popup.html",
+      "default_title": "CleanURL"
+   },
+   "web_accessible_resources": [
+      "icon48.png",
+      "icon48-disabled.png"
+   ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.1.0"
+}
