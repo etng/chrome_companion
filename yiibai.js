@@ -51,42 +51,22 @@ var onload = function(event) {
     var selectors = [
         '.main-header-box header',
         '.extension',
-        '.activity-recommend',
-        '.thumb.article-hero',
-        '.related-entry-sidebar-block',
-        '.sidebar-bd-entry',
+        '.fixed-btn',
+        'header.header',
+        '#qq-group',
+        'footer.footer',
+        '#footer-copyright',
+        '#btn-reward',
+        '#article-correction',
         // '[data-src*="user-gold-cdn"]',
         'dummy',
     ];
     var inject_css = `
-.container,
-.column-view .columen-view-main,
-.column-view .entry-view{
-    max-width: none !important;
+.container-page .content{
+    width: 80%;
 }
-.thumb.post-hero,
-.btn.meiqia-btn,
-.main-header-box,
-.columen-view-aside,
-.column-view .post-meta,
-.post-like-users,
-.container.bottom-container{
-    display: none !important;
-}
-
-.main-area {
-    width: calc(100vw - 40rem) !important;
-}
-
-.sidebar {
-    width: 40rem !important;
-}
-.tag-list-title,
-.article-banner,
-.sidebar .index-book-collect,
-.recommended-area,
-.comment-list-box,
-.sidebar .sticky-block-box .related-entry-sidebar-block{
+.container-page .page-right
+{
     display:none !important;
 }
     `
@@ -104,6 +84,15 @@ var onload = function(event) {
         document.querySelectorAll('a[href^="https://link.juejin.im?target="]').forEach(function(x){
             x.href = decodeURIComponent(x.href.substr("https://link.juejin.im/?target=".length))
         })
+
+        ;[].filter.call(document.querySelectorAll('p'), function(x){return x.innerText.indexOf('公众号')>-1}).forEach(function(x){
+            x.remove()
+        })
+        ;[].filter.call(document.querySelectorAll('h4'), function(x){return x.innerText.indexOf('加QQ群')>-1})
+        .forEach(function(x){
+            x.parentElement.remove()
+        })
+
     }, 1000)
     console.log('it\s clean now!')
 };

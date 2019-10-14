@@ -41,13 +41,8 @@ var onload = function(event) {
 
     ];
     var inject_css = `
-.GalleryNav--next {
-    right: 0;
-    width: 17% !important;
-}
-.GalleryNav--prev {
-    left: 0;
-    width: 33%;
+img#tp{
+    opacity: 0;
 }
     `
     parseCssRules(inject_css).forEach(function(x){

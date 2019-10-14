@@ -1,4 +1,4 @@
-// https://zhuanlan.zhihu.com/p/24567586
+// https://www.toptal.com/laravel/restful-laravel-api-tutorial
 function rot13(s) {
   return s.replace(/[A-Za-z]/g, function (c) {
     return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz=0123456789".charAt(
@@ -43,53 +43,55 @@ var parseCssRules= function(s){
     return rules;
 };
 
+function inject_csses(css_text){
+    parseCssRules(css_text).forEach(function(x){
+        sheet.insertRule(x, sheet.cssRules.length)
+    })
+}
+
+function remove_selectors(selectors, interval){
+    setInterval(function(){
+        [].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
+            x.remove();
+        })
+    }, interval || 1000)
+}
 
 console.log('content script going')
 var onload = function(event) {
     console.log('content loaded')
 
-    var selectors = [
-'header',
-'.csdn-toolbar',
-'.left_fixed',
-'.returnTop',
-'.comment_box',
-'.comment_li_outbox',
-'.recommend_tit',
-'.recommend_list',
-'.more_comment',
-'.article_copyright',
-'.article_tags',
-'.article_collect',
-'aside',
-'article .article_bar',
-'.save_code',
-'.pulllog-box',
-'.readall_box',
-'[id^=dmp_ad_]',
-'#mainBox .recommend-right',
-'#mainBox .recommend-box',
-'.aside-box .footer-contact-box',
-'.aside-box .contact-info',
-'.aside-box .feed_copyright',
-    'dummy'
-    ];
-    var inject_css = `
-main{
-    width: 100% !important;
-    max-width: 100% !important;
-}
-    `
-    parseCssRules(inject_css).forEach(function(x){
-        sheet.insertRule(x, sheet.cssRules.length)
-    })
+    try{
+        document.title=document.querySelectorAll('h1.uk-h1')[0].innerText
+    }catch(e){
+        console.log('failed to update title', e)
+    }
+
+    inject_csses(`
+
+    `)
+    remove_selectors([
+        '.layout-overlay',
+        '.blog-simple-header',
+        '.bounce_modal',
+        '.post-join',
+        '.hide_in_webview',
+        '.two_columns_layout-extra',
+        'ul.social_share',
+        'dummy'
+    ])
     setInterval(function(){
-        [].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
-            x.remove();
-        })
-        document.querySelectorAll('#article_content').forEach(function(x){
-            x.removeAttribute('style')
-        })
+        // document.querySelectorAll('.entry-content h1').forEach(function(x){x.setAttribute('data-text', x.innerText.trim())})
+        // ;['交流社区', '文章推荐'].forEach(function(x){
+        //     var h1=document.querySelector('h1[data-text*="'+x+'"]')
+        //     if(h1){
+        //         h1.nextElementSibling.remove()
+        //         h1.remove()
+        //     }
+        // })
+        // document.querySelectorAll('a[href^="https://link.juejin.im?target="]').forEach(function(x){
+        //     x.href = decodeURIComponent(x.href.substr("https://link.juejin.im/?target=".length))
+        // })
     }, 1000)
     console.log('it\s clean now!')
 };

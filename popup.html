@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>QR Code</title>
     <style>
       body {
@@ -15,18 +17,31 @@
         color: #888;
         font-size: 14px;
       }
-      #title {
+      h3 {
         height:30px;
         color: #333;
+      }
+      textarea{
+        max-width: 95%;
       }
     </style>
     <script src="qrcode.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
-    <div id="title">QR Code</div>
+    <h3>QR Code</h3>
+    <h3>状态切换</h3>
+    <div>
+      <label>打开 <input type="radio" name="enable_this_domain" value="1" checked="true"> </label>
+      <label>关闭 <input type="radio" name="enable_this_domain" value="0"> </label>
+
+    </div>
     <div id="url"></div>
-    <div id="image-result" style="width:270px;height:270px;">
+    <div id="image-result" style="width:82px;height:82px;">
+    </div>
+    <h3>Markdown</h3>
+    <div class="width:100%;max-width:100%">
+      <textarea class="md_link" rows="5"></textarea>
     </div>
   </body>
 </html>

@@ -57,6 +57,7 @@ var selectors = [
     '.rs-container-foot',
     '.speak',
     '#open-tag',
+    '#tashuo_bottom',
     '.lemma-relation-table',
 ];
 css_rules = `

@@ -52,7 +52,9 @@ var onload = function(event) {
         '.post .show-foot',
         '.side-tool',
         '#web-note-ad-1',
+        '#web-note-ad-2',
         '#web-note-ad-fixed',
+        '#note-fixed-ad-container',
         'dummy'
     ];
     var inject_css = `body {

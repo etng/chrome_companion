@@ -32,40 +32,54 @@ var sheet = (function() {
 
 var onload = function(event){
     console.log('onload', event)
-    var selectors = [
-        '.global-nav.sf-header',
-        '.global-navTags',
-        '.post-topheader__side',
-        '#footer',
-        'div.side',
-        'div.recommend-post',
-        '#mainLike',
-        '#mainBookmark',
-        '.post-topheader__title--icon-symbol',
-        '.post-topheader__info .taglist--inline',
-        '.post-topheader__info .article__author',
-        '.comments--news',
-        '.comments-container',
-        '.article-operation',
-        '.widget-register',
-        '#fixedTools',
-        '.app-promotion-bar',
-        '.article__reward-info',
-        '.article__reward-btn',
-        '.post-comment-title',
-    ];
-    var inject_css = `.fmt pre {
-        max-height: none;
-    }`
-    parseCssRules(inject_css).forEach(function(x){
-        sheet.insertRule(x, sheet.cssRules.length)
-    })
-    ;[].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
-        x.remove();
-    })
-    document.querySelector('.main.col-xs-12').setAttribute('class', 'col-xs-12  main')
-    // var help_link = document.evaluate('//button[contains(@class, "yt-google-help-link"', document.body).iterateNext()
+    try{
+        document.title=document.title.replace(' - SegmentFault 思否', '')
+    }catch(e){
+        console.log('failed to update title', e)
+    }
+    if(/^\/p\//g.test(location.pathname)){
+        location.href = document.querySelector('.news__item-title a').href
+    }
+    else
+    {
+        var selectors = [
+            '#loginBanner.loginBanner',
+            '.widget-share__full',
+            '.global-nav.sf-header',
+            '.global-navTags',
+            '.post-topheader__side',
+            '#footer',
+            'div.side',
+            'div.recommend-post',
+            '#mainLike',
+            '#mainBookmark',
+            '.post-topheader__title--icon-symbol',
+            '.post-topheader__info .taglist--inline',
+            '.post-topheader__info .article__author',
+            '.comments--news',
+            '.comments-container',
+            '.article-operation',
+            '.widget-register',
+            '#fixedTools',
+            '.app-promotion-bar',
+            '.article__reward-info',
+            '.article__reward-btn',
+            '.post-comment-title',
+        ];
+        var inject_css = `.fmt pre {
+            max-height: none;
+        }`
+        parseCssRules(inject_css).forEach(function(x){
+            sheet.insertRule(x, sheet.cssRules.length)
+        })
+        ;[].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
+            x.remove();
+        })
+        document.querySelector('.main.col-xs-12').setAttribute('class', 'col-xs-12  main')
+        // var help_link = document.evaluate('//button[contains(@class, "yt-google-help-link"', document.body).iterateNext()
+    }
 }
+
 
 if(document.readyState == 'complete'){
     console.log('completed, onload trigger now')

@@ -1,4 +1,4 @@
-// https://zhuanlan.zhihu.com/p/24567586
+// http://www.bo56.com/php7%E6%89%A9%E5%B1%95/
 function rot13(s) {
   return s.replace(/[A-Za-z]/g, function (c) {
     return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz=0123456789".charAt(
@@ -49,49 +49,28 @@ var onload = function(event) {
     console.log('content loaded')
 
     var selectors = [
-        '.main-header-box header',
-        '.extension',
-        '.activity-recommend',
-        '.thumb.article-hero',
-        '.related-entry-sidebar-block',
-        '.sidebar-bd-entry',
-        // '[data-src*="user-gold-cdn"]',
-        'dummy',
+        '#secondary.widget-area',
+        '.header-top',
+        'footer#colophon',
+        '.rel_post',
+        '.post-link-share',
+        'img[data-original*="zhishixingqiuerweima"]',
+        '#comments.comments-area',
+        'header.entry-header .meta-top1',
+        '#site-navigation #nav-menu.nav-menu',
+        '#backtoTop',
+        '#crumbs',
+        '.corpright',
+        '.nav-single',
+        'dummy'
     ];
     var inject_css = `
-.container,
-.column-view .columen-view-main,
-.column-view .entry-view{
-    max-width: none !important;
-}
-.thumb.post-hero,
-.btn.meiqia-btn,
-.main-header-box,
-.columen-view-aside,
-.column-view .post-meta,
-.post-like-users,
-.container.bottom-container{
-    display: none !important;
-}
-
-.main-area {
-    width: calc(100vw - 40rem) !important;
-}
-
-.sidebar {
-    width: 40rem !important;
-}
-.tag-list-title,
-.article-banner,
-.sidebar .index-book-collect,
-.recommended-area,
-.comment-list-box,
-.sidebar .sticky-block-box .related-entry-sidebar-block{
-    display:none !important;
+#primary.site-content{
+    width:auto;
 }
     `
 
-    document.title=document.title.replace('  - 掘金', '');
+    document.title=document.title.replace(' - 博学无忧', '').trim();
 
 
     parseCssRules(inject_css).forEach(function(x){
@@ -101,9 +80,17 @@ var onload = function(event) {
         [].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
             x.remove();
         })
-        document.querySelectorAll('a[href^="https://link.juejin.im?target="]').forEach(function(x){
-            x.href = decodeURIComponent(x.href.substr("https://link.juejin.im/?target=".length))
+        document.querySelectorAll('.entry-content h1').forEach(function(x){x.setAttribute('data-text', x.innerText.trim())})
+        ;['交流社区', '文章推荐'].forEach(function(x){
+            var h1=document.querySelector('h1[data-text*="'+x+'"]')
+            if(h1){
+                h1.nextElementSibling.remove()
+                h1.remove()
+            }
         })
+        // document.querySelectorAll('a[href^="https://link.juejin.im?target="]').forEach(function(x){
+        //     x.href = decodeURIComponent(x.href.substr("https://link.juejin.im/?target=".length))
+        // })
     }, 1000)
     console.log('it\s clean now!')
 };
