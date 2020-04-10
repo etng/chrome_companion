@@ -85,7 +85,11 @@ var onload = function(event) {
 .article-banner,
 .sidebar .index-book-collect,
 .recommended-area,
+.request-health-alert,
 .comment-list-box,
+.author-info-block,
+.author-block,
+.tag-list-box,
 .sidebar .sticky-block-box .related-entry-sidebar-block{
     display:none !important;
 }

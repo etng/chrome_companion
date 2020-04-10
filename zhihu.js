@@ -70,6 +70,24 @@ var onload = function(event) {
     .Layout-main{
         width: 98%;
     }
+    .Post-SideActions,
+    .Post-Header button,
+    .CornerButtons,
+    .ColumnPageHeader-Wrapper,
+    .ContentItem-time,
+    .Post-topicsAndReviewer,
+    .TopicList.Post-Topics,
+    .Post-Sub.Post-NormalSub,
+    .Post-NormalMain .Reward,
+    .ContentItem-actions{
+        display: none !important;
+    }
+    .Post-NormalMain .Post-Header,
+    .Post-NormalMain>div,
+    .Post-NormalSub>div{
+        width: 1024px;
+    }
+
     `
     parseCssRules(inject_css).forEach(function(x){
         sheet.insertRule(x, sheet.cssRules.length)
@@ -77,6 +95,10 @@ var onload = function(event) {
     setInterval(function(){
         [].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
             x.remove();
+        })
+        document.querySelectorAll('a.external').forEach(function(a){
+            a.href = new URLSearchParams(a.search).get('target')
+            a.classList.remove("external")
         })
     }, 1000)
     console.log('it\s clean now!')
