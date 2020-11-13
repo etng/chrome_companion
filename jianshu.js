@@ -57,7 +57,17 @@ var onload = function(event) {
         '#note-fixed-ad-container',
         'dummy'
     ];
-    var inject_css = `body {
+    var inject_css = `
+    ._3Pnjry,
+    #note-page-comment,
+    section.ouvJEz,
+    ul._1iTR78,
+    footer,
+    aside._2OwGUo{
+        display: none !important;
+    }
+
+    body {
         padding-top: 0;
     }
     .note .post{

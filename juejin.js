@@ -90,6 +90,7 @@ var onload = function(event) {
 .author-info-block,
 .author-block,
 .tag-list-box,
+.copy-code-btn,
 .sidebar .sticky-block-box .related-entry-sidebar-block{
     display:none !important;
 }
@@ -104,6 +105,11 @@ var onload = function(event) {
     setInterval(function(){
         [].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
             x.remove();
+        })
+        document.querySelectorAll('img.lazyload').forEach(function(x){
+            if(!x.classList.contains('loaded')){
+                x.src = x.dataset['src']
+            }
         })
         document.querySelectorAll('a[href^="https://link.juejin.im?target="]').forEach(function(x){
             x.href = decodeURIComponent(x.href.substr("https://link.juejin.im/?target=".length))

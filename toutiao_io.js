@@ -6,6 +6,8 @@ var onload = function(event) {
 
     var selectors = [
         '#welcome-app-banner',
+        '.posts>.banner',
+        '.alert.subscribe-banner'
     ];
     [].forEach.call(document.querySelectorAll(selectors.join(', ')), function(x){
         x.remove();
